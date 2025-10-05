@@ -1,0 +1,32 @@
+name: Dependency Cache Test
+
+on:
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  cache-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Cache dependencies
+      - name: Cache Python dependencies
+        id: cache-deps
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: cache-c0c78ec
+          restore-keys: |
+            cache-c0c78ec
+
+      # Step 3: Prime cache step
+      - name: prime-cache-c0c78ec
+        run: |
+          if [ "${{ steps.cache-deps.outputs.cache-hit }}" == "true" ]; then
+            echo "Cache hit!"
+          else
+            echo "Cache miss!"
+          fi
