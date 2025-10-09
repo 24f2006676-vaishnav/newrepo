@@ -1,3 +1,4 @@
+# This is a fun quiz game about festivals.
 # quiz_app.py
 
 # Define the quiz questions
@@ -19,10 +20,10 @@ score = 0
 # Loop through each question
 for i, q in enumerate(quiz):
     print(f"\nQuestion {i+1}: {q['question']}")
-    
+
     for index, option in enumerate(q['options']):
         print(f"{index + 1}. {option}")
-    
+
     try:
         choice = int(input("Enter the number of your choice: "))
         if q['options'][choice - 1] == q['answer']:
